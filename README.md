@@ -1,7 +1,7 @@
 # Scorecard
 
 ## Possibility
-This is an example of a way to graphically present the Scorecard data that is easier to comprehend for the layperson as opposed to requiring them abstract away patterns from a list of numbers eg. 1, 1.1, 1.12, ... 1.83.
+This is an example of a way to graphically present the Scorecard data that is easier to comprehend for the layperson as opposed to requiring them to abstract away patterns from a list of numbers eg. 1, 1.1, 1.12, ... 1.83.
 
 ## Opportunity
 GDP is a measure that's quite illustrative of the benefit of presenting the scorecard graphically. Specifically, for GDP, the countries are **not** centered around the mean, which highlights what's missing from reporting only the mean. The range and dispersion of the distribution is most meaningful in this case. The graphical method addresses both the indexing and presentation of the data.
@@ -18,6 +18,14 @@ Corruption perception data is measured an order of magnitude differently after 2
 Standardize the year to which the data is mapped - no ranges</br>
 Can missing data be completed</br>
 Are there other measures besides infant mortaility for which lower is better? Gender gap data?</br>
+
+#### Issues with new data imports
+Years for Econ Freedom?? 2001-2018 or 2002-2019</br>
+Internet Freedom Changed 2013-14 to 2013</br>
+Corruption Percept modified Sudan 2002 to be blank</br>
+Human dev blanks for Nigeria in 2000, 2001, 2002</br>
+Peace changed from 2013-14 to 2013</br>
+Ecological Start at 1999 or 2000?
 
 ### Graphic Display
 Show multiplicative measures logarithmically, but display actual units instead of log-value on Y-axis</br>

@@ -6,14 +6,14 @@ rm(list=ls())
 # data import and tidying ####
 # GDP
 countries_gdp <- read_csv(
-  "countries_gdp.csv"
+  "gdp.csv"
 )
 
 countries_gdp %<>%
   gather(
     key = "Year",
     value = "GDP",
-    `2000`:`2017`
+    `2000`:`2018`
   ) %>% 
   select(
     -`Pop Rank`
@@ -27,7 +27,7 @@ countries_pop %<>%
   gather(
     key = "Year",
     value = "People",
-    `2000`:`2017`
+    `2000`:`2019`
   )
 
 # Econ Freedom
@@ -35,11 +35,12 @@ countries_econ_freedom <- read_csv(
   "countries_econ_freedom.csv"
 )
 
+# Years for Econ Freedom?? 2001-2018 or 2002-2019
 countries_econ_freedom %<>% 
   gather(
     key = "Year",
     value = "econ_freedom",
-    `2001`:`2018`
+    `2002`:`2019`
   )
 
 countries_press_freedom <- read_csv(
@@ -73,9 +74,13 @@ countries_civil_liberty <- countries_civil_liberty %>%
     `2000`:`2016`
   )
 
+# Changed 2013-14 to 2013
 countries_internet_freedom <- read_csv(
   "countries_internet_freedom.csv"
-)
+) %>% 
+  select(
+    -`Pop Rank`
+  )
 countries_internet_freedom <- countries_internet_freedom %>% 
   gather(
     key = "Year",
@@ -85,12 +90,16 @@ countries_internet_freedom <- countries_internet_freedom %>%
 
 countries_corruption_percept <- read_csv(
   "countries_corruption_percept.csv"
-)
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+# modified Sudan 2002 to be blank
 countries_corruption_percept <- countries_corruption_percept %>% 
   gather(
     key = "Year",
     value = "corruption_percept",
-    `2000`:`2017`
+    `2000`:`2019`
   ) %>% 
   mutate(
     Year = as.integer(Year),
@@ -103,17 +112,25 @@ countries_corruption_percept <- countries_corruption_percept %>%
 
 countries_infant_mortality <- read_csv(
   "countries_infant_mortality.csv"
-)
+) %>% 
+  select(
+    -`Pop Rank`
+  )
 
 countries_infant_mortality <- countries_infant_mortality %>% 
   gather(
     key = "Year",
     value = "infant_mortality",
-    `2000`:`2017`
+    `2000`:`2018`
   )
+
+# blanks for Nigeria in 2000, 2001, 2002
 countries_human_dev <- read_csv(
   "countries_human_dev.csv"
-)
+) %>% 
+  select(
+    -`Pop Rank`
+  )
 countries_human_dev <- countries_human_dev %>% 
   gather(
     key = "Year",
@@ -122,12 +139,15 @@ countries_human_dev <- countries_human_dev %>%
   )
 countries_gender_gap <- read_csv(
   "countries_gender_gap.csv"
-)
+) %>% 
+  select(
+    -`Pop Rank`
+  )
 countries_gender_gap <- countries_gender_gap %>% 
   gather(
     key = "Year",
     value = "gender_gap",
-    `2006`:`2018`
+    `2006`:`2019`
   )
 countries_giving <- read_csv(
   "countries_giving.csv"
@@ -139,14 +159,18 @@ countries_giving <- countries_giving %>%
     `2010`:`2018`
   )
 
+# Peace changed from 2013-14 to 2013
 countries_peace <- read_csv(
   "countries_peace.csv"
-)
+) %>% 
+  select(
+    -`Pop Rank`
+  )
 countries_peace <- countries_peace %>%
   gather(
     key = "Year",
     value = "peace",
-    `2007`:`2018`
+    `2007`:`2019`
   )
 countries_environmental <- read_csv(
   "countries_environmental.csv"
@@ -158,6 +182,89 @@ countries_environmental <- countries_environmental %>%
     `2000`:`2018`
   )
 
+countries_happiness <- read_csv(
+  "happiness.csv"
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+
+countries_happiness <- countries_happiness %>% 
+  gather(
+    key = "Year",
+    value = "happiness",
+    `2006`:`2017`
+  )
+
+countries_poverty <- read_csv(
+  "poverty.csv"
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+
+countries_poverty <- countries_poverty %>% 
+  gather(
+    key = "Year",
+    value = "poverty",
+    `2000`:`2016`
+  )
+
+countries_ecological <- read_csv(
+  "ecological.csv"
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+# Start at 1999 or 2000?
+countries_ecological <- countries_ecological %>% 
+  gather(
+    key = "Year",
+    value = "ecological",
+    `1999`:`2016`
+  )
+
+countries_gases <- read_csv(
+  "gases.csv"
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+
+countries_gases <- countries_gases %>% 
+  gather(
+    key = "Year",
+    value = "gases",
+    `2000`:`2016`
+  )
+
+countries_fossil <- read_csv(
+  "fossil_fuel.csv"
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+
+countries_fossil <- countries_fossil %>% 
+  gather(
+    key = "Year",
+    value = "fossil_fuel",
+    `2000`:`2015`
+  )
+
+countries_trees <- read_csv(
+  "trees.csv"
+) %>% 
+  select(
+    -`Pop Rank`
+  )
+
+countries_trees <- countries_trees %>% 
+  gather(
+    key = "Year",
+    value = "trees",
+    `2001`:`2018`
+  )
 
 # data wrangling ####
 
@@ -173,16 +280,28 @@ countries_data <- countries_pop %>%
     countries_corruption_percept
   ) %>% 
   left_join(
+    countries_ecological
+  ) %>% 
+  left_join(
     countries_econ_freedom
   ) %>% 
   left_join(
     countries_environmental
   ) %>% 
   left_join(
+    countries_fossil
+  ) %>% 
+  left_join(
+    countries_gases
+  ) %>% 
+  left_join(
     countries_gender_gap
   ) %>% 
   left_join(
     countries_giving
+  ) %>% 
+  left_join(
+    countries_happiness
   ) %>% 
   left_join(
     countries_human_dev
@@ -194,13 +313,19 @@ countries_data <- countries_pop %>%
     countries_internet_freedom
   ) %>% 
   left_join(
+    countries_peace
+  ) %>% 
+  left_join(
     countries_pol_rights
+  ) %>% 
+  left_join(
+    countries_poverty
   ) %>% 
   left_join(
     countries_press_freedom
   ) %>% 
   left_join(
-    countries_peace
+    countries_trees
   )
 
 # select specific metrics from all data
@@ -324,6 +449,10 @@ gdp_year_data <- gdp_data %>%
   mutate(
     sd_mn_gdp = sd_gdp/mn_gdp
   )
+
+#gdp_lm <- lm(gdp_year_data$mn_gdp ~ gdp_year_data$Year)
+#summary(gdp_lm)
+#?lm()
 
 civil_liberty_year_data <- civil_liberty_data %>%
   drop_na(
@@ -2134,3 +2263,4 @@ ggplot(
   ) + 
   theme(axis.text.x = element_text(angle = 90))
 ggsave('plot_pr.png')
+
