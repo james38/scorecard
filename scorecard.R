@@ -225,17 +225,17 @@ countries_ecological <- countries_ecological %>%
   )
 
 countries_gases <- read_csv(
-  "gases.csv"
-) %>% 
-  select(
-    -`Pop Rank`
-  )
+  "countries_co2.csv"
+) #%>% 
+  #select(
+  #  -`Pop Rank`
+  #)
 
 countries_gases <- countries_gases %>% 
   gather(
     key = "Year",
     value = "gases",
-    `2000`:`2016`
+    `2000`:`2018`
   )
 
 countries_fossil <- read_csv(
@@ -2412,6 +2412,8 @@ ggplot(
       color = 'red',
       alpha = gdp_alpha_var
     ),
+    width = 0.25,
+    height = 0.25,
     show.legend = FALSE
   ) +
   geom_jitter(
@@ -2423,6 +2425,8 @@ ggplot(
       color = 'green',
       alpha = gdp_alpha_var
     ),
+    width = 0.25,
+    height = 0.25,
     show.legend = FALSE
   ) +
   geom_line(
@@ -2437,7 +2441,11 @@ ggplot(
     alpha = gdp_line_alpha,
     show.legend = FALSE
   ) + 
-  theme(axis.text.x = element_text(angle = 90))
+  scale_size_area(
+    
+  ) +
+  theme(axis.text.x = element_text(angle = 90)) + 
+  ggtitle("Yearly GDP per Country") + xlab("Year") + ylab("log-GDP")
 ggsave('plot_gdp.png')
 
 ggplot(
@@ -2732,6 +2740,8 @@ ggplot(
       color = 'red',
       alpha = gas_alpha_var
     ),
+    width = 0.25,
+    height = 0.25,
     show.legend = FALSE
   ) +
   geom_jitter(
@@ -2743,6 +2753,8 @@ ggplot(
       color = 'green',
       alpha = gas_alpha_var
     ),
+    width = 0.25,
+    height = 0.25,
     show.legend = FALSE
   ) +
   geom_line(
@@ -2757,8 +2769,14 @@ ggplot(
     alpha = gases_line_alpha,
     show.legend = FALSE
   ) + 
-  theme(axis.text.x = element_text(angle = 90))
+  scale_size_area(
+    
+  ) +
+  theme(axis.text.x = element_text(angle = 90)) + 
+  ggtitle("Yearly CO2 Emissions per Country") + xlab("Year") + ylab("CO2 Emissions (billion tonnes)")
 ggsave('plot_gas.png')
+#ggsave('plot_gas.svg')
+ggsave('plot_gas.pdf')
 
 ggplot(
   
